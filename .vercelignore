@@ -1,0 +1,11 @@
+# Local build output must not be uploaded by `vercel deploy`; Vercel builds from source.
+.output
+.vercel
+.nuxt
+.nitro
+.data
+.cache
+dist
+node_modules
+.env
+.env.*
