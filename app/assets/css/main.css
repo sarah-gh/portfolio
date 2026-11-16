@@ -1,0 +1,113 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--color-text);
+  /* Page backdrop: visible from the first paint, behind the WebGL scene. */
+  background:
+    radial-gradient(ellipse at 10% 85%, rgb(84 32 79 / 45%), transparent 50%),
+    radial-gradient(ellipse at 92% 8%, rgb(25 60 102 / 45%), transparent 50%),
+    var(--color-bg);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Small uppercase label above section titles. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+
+.section-title em {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -.01em;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glass card used by several home sections. */
+.glass {
+  background: var(--color-surface-glass);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+}
+
+/* Content is hidden only when JS is on, to avoid a flash before the intro animation. */
+.js [data-intro] {
+  visibility: hidden;
+  animation: intro-fallback 0s 3s forwards;
+}
+
+@keyframes intro-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-intro] {
+    visibility: visible;
+    animation: none;
+  }
+}
